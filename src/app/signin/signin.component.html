@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <form [formGroup]="signinForm" (ngSubmit)="signInSubmit()">
+                <h4> Login </h4>
+                <div>
+                    <label for="Username">Username</label>
+                    <input id="first-name" type="text" formControlName="userName" />
+                    <div class="error-msg" *ngIf="!userName?.valid && (userName?.dirty ||userName?.touched)">
+                        <div [hidden]="userName && !userName.errors?.required">
+                            Username is required
+                        </div>
+                        <div [hidden]="userName && !userName.errors?.minlength">
+                            Username is 3
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="Password">Password</label>
+                    <input id="Password" type="text" formControlName="passWord" />
+
+                    <div class="error-msg" *ngIf="!passWord?.valid && (passWord?.dirty ||passWord?.touched)">
+                        <div [hidden]="passWord && !passWord.errors?.required">
+                            Password is required
+                        </div>
+                        <div [hidden]="passWord && !passWord.errors?.minlength">
+                            Password is 3
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="Password">Confirm Password</label>
+                    <input id="Password" type="text" formControlName="confirmPassWord" />
+
+                    <div class="error-msg" *ngIf="!confirmPassWord?.valid && (confirmPassWord?.dirty ||confirmPassWord?.touched)">
+                        <div [hidden]="confirmPassWord && !confirmPassWord.errors?.required">
+                            Confirm Password is required
+                        </div>
+                        <div [hidden]="confirmPassWord && !confirmPassWord.errors?.minlength">
+                            Confirm Password is 3
+                        </div>
+                        <div *ngIf="confirmPassWord && confirmPassWord.errors?.mustMatch">Passwords must match</div>
+                    </div>
+                </div>
+                <div class="text-center m-2">
+                    <button class="btn btn-primary mr-2" type="submit" [disabled]="!signinForm.valid">Submit</button>
+                    <button class="btn btn-primary" type="type" [routerLink]="['/login']">Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

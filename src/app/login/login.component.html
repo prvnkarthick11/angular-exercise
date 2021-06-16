@@ -1,0 +1,40 @@
+<div class="row">
+<div class="col-md-4 mx-auto">
+    <div class="card">
+    <form [formGroup]="loginForm" (ngSubmit)="logInSubmit()">
+        <h4> Login </h4>
+        <div>
+            <label for="Username">Username</label>
+            <input id="first-name" type="text" formControlName="userName" />
+            <div class="error-msg"
+    *ngIf="!userName?.valid && (userName?.dirty ||userName?.touched)">
+    <div [hidden]="userName && !userName.errors?.required">
+      First Name is required
+    </div>
+    <div [hidden]="userName && !userName.errors?.minlength">
+      Min Length is 10
+    </div>
+  </div>
+        </div>
+        <div>
+            <label for="Password">Password</label>
+            <input id="Password" type="text" formControlName="passWord" />
+            
+            <div class="error-msg"
+    *ngIf="!passWord?.valid && (passWord?.dirty ||passWord?.touched)">
+    <div [hidden]="passWord && !passWord.errors?.required">
+      First Name is required
+    </div>
+    <div [hidden]="passWord && !passWord.errors?.minlength">
+      Min Length is 10
+    </div>
+  </div>
+        </div>
+        <div class="text-center m-2">
+            <button  class="btn btn-primary mr-2" type="submit" [disabled]="!loginForm.valid">Submit</button>
+            <button  class="btn btn-primary" type="type" [routerLink]="['/signin']">Sign In</button>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>
