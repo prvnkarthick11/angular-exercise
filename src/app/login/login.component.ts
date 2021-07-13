@@ -30,7 +30,7 @@ get userName() {
   logInSubmit(){
     alert("Successfully Logged in");
     const tempSessionVar=JSON.parse(sessionStorage.getItem('user')|| '{}');
-    if((tempSessionVar[0].userName === this.loginForm.get('userName')?.value) && (tempSessionVar[0].passWord === this.loginForm.get('passWord')?.value)){
+    if((tempSessionVar.userName === this.loginForm.get('userName')?.value) && (tempSessionVar.passWord === this.loginForm.get('passWord')?.value)){
       this.router.navigate(['/signin'])
     }
   }

@@ -35,9 +35,7 @@ export class SigninComponent implements OnInit {
     let key = 'user'; 
     let value = {'userName':this.signinForm.controls['userName'].value,'passWord':this.signinForm.controls['passWord'].value};
 
-   let value1 = JSON.stringify(value);
-
-    sessionStorage.setItem(key, value1);
+    sessionStorage.setItem(key, JSON.stringify(value));
     this.signinForm.reset();
   }
 

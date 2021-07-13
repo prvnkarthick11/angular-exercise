@@ -1,0 +1,146 @@
+<div class="row mx-0">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <h4> Registration </h4>
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input id="first-name" type="text" formControlName="firstName" />
+                    <div class="error-msg" *ngIf="!firstName?.valid && (firstName?.dirty ||firstName?.touched)">
+                        <div [hidden]="firstName && !firstName.errors?.required">
+                            First Name is required
+                        </div>
+                        <div [hidden]="firstName && !firstName.errors?.minlength">
+                            Min Length is 10
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" type="text" formControlName="lastName" />
+                    <div class="error-msg" *ngIf="!lastName?.valid && (lastName?.dirty ||lastName?.touched)">
+                        <div [hidden]="lastName && !lastName.errors?.required">
+                            First Name is required
+                        </div>
+                        <div [hidden]="lastName && !lastName.errors?.minlength">
+                            Min Length is 10
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="age">Age</label>
+                    <input id="age" type="date" formControlName="age" />
+                    <div class="error-msg" *ngIf="!age?.valid && (age?.dirty ||age?.touched)">
+                        <div [hidden]="age && !age.errors?.required">
+                            First Name is required
+                        </div>
+                        <div [hidden]="age && !age.errors?.ageInValid">
+                            Age should be greater than 18
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let phone of getPhonesFormControls(); let i = index">
+                    <label>Phone {{i}} </label>
+                    <input [formControl]="phone" type="text">
+                    <button (click)="addPhone()">Add new phone</button>
+                    <button (click)="removePhone(i)">Remove Phone</button>
+                    <p style="color:red;" *ngIf="findDuplicate(phone, i) && i > 0">Duplicate Phone Number </p>
+
+                </div>
+                <div>
+                    <input type="checkbox" formControlName="permanentAddresschecbox" (change)="eventCheck($event)" />
+                    <label for="Password">Same as Current Address</label>
+                </div>
+                <div formGroupName="currentAddress">
+                    <div>
+                        <label for="Password">Current Address</label>
+
+                        <label for="Password">Address Line 1</label>
+                        <input id="Password" type="text" formControlName="addressline1" (keyup)="addressChange($event)" />
+
+                        <div class="error-msg" *ngIf="!currentAddressLine1?.valid && (currentAddressLine1?.dirty ||currentAddressLine1?.touched)">
+                            <div [hidden]="currentAddressLine1 && !currentAddressLine1.errors?.required">
+                                Address Line is required
+                            </div>
+                            <div [hidden]="currentAddressLine1 && !currentAddressLine1.errors?.minlength">
+                                Min Length is 3
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="Password">Address Line 2</label>
+                        <input id="Password" type="text" formControlName="addressline2" (keyup)="addressChange($event)" />
+
+                        <div class="error-msg" *ngIf="!currentAddressLine2?.valid && (currentAddressLine2?.dirty ||currentAddressLine2?.touched)">
+                            <div [hidden]="currentAddressLine2 && !currentAddressLine2.errors?.required">
+                                Address Line 2 is required
+                            </div>
+                            <div [hidden]="currentAddressLine2 && !currentAddressLine2.errors?.minlength">
+                                Min Length is 3
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="Password">Address Line 3</label>
+                        <input id="Password" type="text" formControlName="addressline3" (keyup)="addressChange($event)" />
+
+                        <div class="error-msg" *ngIf="!currentAddressLine3?.valid && (currentAddressLine3?.dirty ||currentAddressLine3?.touched)">
+                            <div [hidden]="currentAddressLine3 && !currentAddressLine3.errors?.required">
+                                Address Line 2 is required
+                            </div>
+                            <div [hidden]="currentAddressLine3 && !currentAddressLine3.errors?.minlength">
+                                Min Length is 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div formGroupName="permanentAddress">
+                    <div>
+                        <label for="Password">Permanent Address</label>
+                        <label for="Password">Address Line 1</label>
+                        <input id="Password" type="text" formControlName="addressline1" (keyup)="permanentaddressChange($event)" />
+                        <div class="error-msg" *ngIf="!permanentAddressLine1?.valid && (permanentAddressLine1?.dirty ||permanentAddressLine1?.touched)">
+                            <div [hidden]="permanentAddressLine1 && !permanentAddressLine1.errors?.required">
+                                Address Line 2 is required
+                            </div>
+                            <div [hidden]="permanentAddressLine1 && !permanentAddressLine1.errors?.minlength">
+                                Min Length is 3
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="Password">Address Line 2</label>
+                        <input id="Password" type="text" formControlName="addressline2" (keyup)="permanentaddressChange($event)" />
+                        <div class="error-msg" *ngIf="!permanentAddressLine2?.valid && (permanentAddressLine2?.dirty ||permanentAddressLine2?.touched)">
+                            <div [hidden]="permanentAddressLine2 && !permanentAddressLine2.errors?.required">
+                                Address Line 2 is required
+                            </div>
+                            <div [hidden]="permanentAddressLine2 && !permanentAddressLine2.errors?.minlength">
+                                Min Length is 3
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="Password">Address Line 3</label>
+                        <input id="Password" type="text" formControlName="addressline3" (keyup)="permanentaddressChange($event)" />
+                        <div class="error-msg" *ngIf="!permanentAddressLine3?.valid && (permanentAddressLine3?.dirty ||permanentAddressLine3?.touched)">
+                            <div [hidden]="permanentAddressLine3 && !permanentAddressLine3.errors?.required">
+                                Address Line 2 is required
+                            </div>
+                            <div [hidden]="permanentAddressLine3 && !permanentAddressLine3.errors?.minlength">
+                                Min Length is 3
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center m-2">
+                    <button class="btn btn-primary mr-2" type="submit" [disabled]="!userForm.valid">Submit</button>
+                    <button class="btn btn-primary mr-2" type="submit" (click)="showstatus()">Submit</button>
+                    <button class="btn btn-primary" type="type" [routerLink]="['/login']">Log In</button>
+                </div>
+            </form>
+
+            {{userForm.value | json}}
+        </div>
+    </div>
+</div>
